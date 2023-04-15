@@ -1,6 +1,7 @@
 import React from 'react';
-import './App.css';
+import { Route, Routes } from 'react-router-dom';
 import { Header, NewsContainer } from "./Components";
+import './App.css';
 
 function App() {
 
@@ -8,7 +9,10 @@ function App() {
     <div className="App">
        <Header/>
        <main className="main">
-           <NewsContainer/>
+           <Routes>
+               <Route path="/" element={ <NewsContainer/> }/>
+               <Route path="news/"/>
+           </Routes>
        </main>
     </div>
   );
