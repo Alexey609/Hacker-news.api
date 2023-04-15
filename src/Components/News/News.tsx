@@ -1,40 +1,33 @@
-import React, {useState, useEffect } from "react";
+import React from "react";
 import Moment from 'react-moment';
+import Paper from '@mui/material/Paper';
 import { Link } from "react-router-dom";
-import { getNews } from '../../Api/hnApi';
+import styles from './News.module.css';
 
 interface ID {
-  newsID: number
+  news: any
 }
 
-interface Object {
-    url: string
-    title: string
-    by: string
-    time: number
-}
+export const News = ({ news } :ID) => {
 
-export const News = ({ newsID } :ID) => {
-    const [news, setNews] = useState({} as Object);
-
-    useEffect(() => {
-       getNews(newsID).then(data => data && data.url && setNews(data));
-
-    }, [newsID]);
-
-
-    return news && news.url ? (
-        <div>
-            <Link to={news.url}>
-                <h6>{news.title}</h6>
-            </Link>
-            <div>
-                <p>Автор: {news.by}</p>
-                <p>Опубликовано</p>
-                <Moment unix format='MMM, DD YYYY • hh:mm a'>
-                    {news.time}
-                </Moment>
-            </div>
+    return (
+        <div className={styles.item}>
+            <Paper elevation={4}>
+                <div className={styles.item__top}>
+                    <Link to={news.url} className={styles.item__link}>
+                        {news.title}
+                    </Link>
+                </div>
+                <div className={styles.item__body}>
+                    <div>Автор {news.user}</div>
+                    <div>
+                        Опубликовано:
+                      <Moment unix format='MMM, DD YYYY • hh:mm a' className={styles.item__time}>
+                        {news.time}
+                      </Moment>
+                    </div>
+                </div>
+            </Paper>
         </div>
-    ) : null;
+    );
 };

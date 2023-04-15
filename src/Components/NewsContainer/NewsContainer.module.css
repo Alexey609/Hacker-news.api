@@ -2,4 +2,6 @@
   max-width: 1200px;
   margin: 0 auto;
   background-color: #FFFFFF;
+  padding: 10px 25px;
+  border-radius: 8px;
 }
