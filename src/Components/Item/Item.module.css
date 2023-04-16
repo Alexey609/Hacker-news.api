@@ -1,0 +1,29 @@
+.detailNews__item {
+   max-width: 1000px;
+   margin: 0 auto;
+   background-color: #FFFFFF;
+   min-height: 400px;
+   border-radius: 6px;
+   padding: 30px 80px;
+   box-shadow: 0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12);
+}
+
+.detailNews__top {
+
+}
+
+.detailNews__title {
+   font-size: 21px;
+}
+
+.detailNews__link {
+   text-decoration: none;
+}
+
+.detailNews__body {
+   margin-top: 15px;
+   display: flex;
+   flex-direction: column;
+   justify-content: space-around;
+   min-height: 100px;
+}

@@ -19,13 +19,15 @@ export const News = ({ news } :ID) => {
                     </Link>
                 </div>
                 <div className={styles.item__body}>
-                    <div>Автор {news.user}</div>
+                    <div>Автор - {news.user}</div>
+                    <div>Рейтинг: {news.points}</div>
                     <div>
                         Опубликовано:
-                      <Moment unix format='MMM, DD YYYY • hh:mm a' className={styles.item__time}>
+                      <Moment unix format='MMM, DD YYYY • hh:mm a' style={{ marginLeft: 4 }}>
                         {news.time}
                       </Moment>
                     </div>
+
                 </div>
             </Paper>
         </div>

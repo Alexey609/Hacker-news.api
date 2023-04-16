@@ -1,8 +1,7 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import { Header, NewsContainer } from "./Components";
+import { Header, NewsContainer, Item } from "./Components";
 import './App.css';
-import {Item} from "./Components/Item/Item";
 
 function App() {
 
