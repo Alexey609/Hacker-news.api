@@ -21,7 +21,7 @@ export const Item = () => {
         if (id) {
             getItem(id).then(data => setItem(data));
         }
-    }, [id])
+    }, [id]);
 
     return (
         <div className={styles.detailNews__item}>

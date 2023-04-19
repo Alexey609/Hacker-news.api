@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import { Header, NewsContainer, Item } from "./Components";
+import { Header, NewsContainer, Item, Footer } from "./Components";
 import './App.css';
 
 function App() {
@@ -13,7 +13,8 @@ function App() {
                <Route path="/" element={ <NewsContainer/> }/>
                <Route path="news/:id" element={ <Item/> }/>
            </Routes>
-       </main>
+        </main>
+        <Footer/>
     </div>
   );
 }
