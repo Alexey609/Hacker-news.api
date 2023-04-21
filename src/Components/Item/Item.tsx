@@ -10,18 +10,21 @@ interface Object {
     time: number
     user: string
     comments_count: number
+    comments: Array<object>
 }
 
 export const Item = () => {
     const {id}: {id?: number} = useParams();
 
-    const [item, setItem] = useState({} as Object);
+    const [item, setItem]:[Object, any] = useState({} as Object);
 
     useEffect(() => {
         if (id) {
             getItem(id).then(data => setItem(data));
         }
     }, [id]);
+
+    console.log(item.comments);
 
     return (
         <div className={styles.detailNews__item}>
@@ -38,6 +41,16 @@ export const Item = () => {
                <div>Автор - {item.user}</div>
                <div>Количество комментариев: {item.comments_count}</div>
            </div>
+
+            <div>
+                {item.comments
+                    .map((comment, id: number) => {
+                    <div key={id}>
+                        {comment.content}
+                    </div>
+                })
+                }
+            </div>
         </div>
     );
 };
