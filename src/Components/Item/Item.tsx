@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import {Link, useParams} from "react-router-dom";
 import Moment from 'react-moment';
 import {getItem} from "../../Api/hnApi";
-import {Comments} from './../Comments/Comments';
+import {Comments} from '../Comments/Comments';
 import styles from './Item.module.css';
 
 interface Object {
