@@ -26,7 +26,6 @@ export const Item = () => {
         }
     }, [id]);
 
-    console.log(item.comments);
 
     return (
         <div className={styles.detailNews__item}>

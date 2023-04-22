@@ -22,10 +22,13 @@ export const Comments = ({ comment }:Comment) => {
                     <Typography>{comment.content}</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
-                    <Typography>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-                        malesuada lacus ex, sit amet blandit leo lobortis eget.
-                    </Typography>
+                    {comment.comments
+                        ?.map((comment: { content: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | React.ReactFragment | React.ReactPortal | null | undefined; }, id: number) =>
+                            <Typography key={id}>
+                                {comment.content}
+                            </Typography>
+                        )
+                    }
                 </AccordionDetails>
             </Accordion>
         </div>
