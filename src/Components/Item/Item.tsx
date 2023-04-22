@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import {Link, useParams} from "react-router-dom";
 import Moment from 'react-moment';
 import {getItem} from "../../Api/hnApi";
+import {Comments} from './../Comments/Comments';
 import styles from './Item.module.css';
 
 interface Object {
@@ -17,7 +18,7 @@ interface Object {
 export const Item = () => {
     const {id}: {id?: number} = useParams();
 
-    const [item, setItem]:[Object, any] = useState({} as Object);
+    const [item, setItem] = useState({} as Object);
 
     useEffect(() => {
         if (id) {
@@ -43,12 +44,11 @@ export const Item = () => {
                <div>Количество комментариев: {item.comments_count}</div>
            </div>
 
-            <div>
+            <div className={styles.comments}>
+                <h4>Комментарии:</h4>
                 {item.comments
-                    .map((comment, id: number) =>
-                    <div key={id}>
-                        {comment.content}
-                    </div>
+                    ?.map((comment, id: number) =>
+                        <Comments key={id} comment={comment}/>
                 )
                 }
             </div>
