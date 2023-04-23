@@ -1,4 +1,6 @@
 import React, {useEffect, useState} from "react";
+import Button from '@mui/material/Button';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import {Link, useParams} from "react-router-dom";
 import Moment from 'react-moment';
 import {getItem} from "../../Api/hnApi";
@@ -23,9 +25,17 @@ export const Item = () => {
     useEffect(() => {
         if (id) {
             getItem(id).then(data => setItem(data));
+            setInterval(() => {
+                getItem(id).then(data => setItem(data));
+            }, 60000)
         }
     }, [id]);
 
+    const handleReset = () => {
+        if (id) {
+            getItem(id).then(data => setItem(data));
+        }
+    };
 
     return (
         <div className={styles.detailNews__item}>
@@ -43,6 +53,14 @@ export const Item = () => {
                <div>Количество комментариев: {item.comments_count}</div>
            </div>
 
+            <div className={styles.container__link}>
+                <Link to="/">
+                    <ArrowBackIcon>
+                    </ArrowBackIcon>
+                </Link>
+                <div>Вернуться назад</div>
+            </div>
+
             <div className={styles.comments}>
                 <h4>Комментарии:</h4>
                 {item.comments
@@ -50,6 +68,11 @@ export const Item = () => {
                         <Comments key={id} comment={comment}/>
                 )
                 }
+                <Button variant="outlined"
+                        style={{ marginTop: 15 }}
+                        onClick={handleReset}>
+                    Перезагрузка
+                </Button>
             </div>
         </div>
     );

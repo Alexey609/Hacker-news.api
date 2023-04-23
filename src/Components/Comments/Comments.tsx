@@ -19,7 +19,9 @@ export const Comments = ({ comment }:Comment) => {
                     aria-controls="panel1a-content"
                     id="panel1a-header"
                 >
-                    <Typography>{comment.content}</Typography>
+                    <Typography style={{ wordWrap: "break-word", width: 800 }}>
+                        {comment.content}
+                    </Typography>
                 </AccordionSummary>
                 <AccordionDetails>
                     {comment.comments

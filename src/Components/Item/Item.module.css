@@ -28,6 +28,12 @@
    min-height: 100px;
 }
 
+.container__link {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
 .comments {
    margin-top: 50px;
 }
