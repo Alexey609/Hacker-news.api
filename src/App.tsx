@@ -1,20 +1,28 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
+import {
+    QueryClient,
+    QueryClientProvider,
+} from '@tanstack/react-query';
 import { Header, NewsContainer, Item, Footer } from "./Components";
 import './App.css';
+
+const queryClient = new QueryClient();
 
 function App() {
 
   return (
     <div className="App">
-       <Header/>
-       <main className="main">
-           <Routes>
+        <QueryClientProvider client={queryClient}>
+          <Header/>
+          <main className="main">
+            <Routes>
                <Route path="/" element={ <NewsContainer/> }/>
                <Route path="news/:id" element={ <Item/> }/>
-           </Routes>
-        </main>
+            </Routes>
+          </main>
         <Footer/>
+        </QueryClientProvider>
     </div>
   );
 }
