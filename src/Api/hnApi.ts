@@ -19,3 +19,10 @@ export const getNews = async () => {
     return result;
 }
 
+export const getItem = async (id: number) => {
+    // const result = await axios.get(newsUrl).then(({ data }) => data);
+    const result = await axios.get(`https://api.hnpwa.com/v0/item/${id}.json`).then(({ data }) => data);
+
+    return result;
+}
+

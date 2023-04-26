@@ -14,7 +14,7 @@ export const News = ({ news } :ID) => {
         <div className={styles.item}>
             <Paper elevation={4}>
                 <div className={styles.item__top}>
-                    <Link to={news.url} className={styles.item__link}>
+                    <Link to={`/news/${news.id}`} className={styles.item__link}>
                         {news.title}
                     </Link>
                 </div>
