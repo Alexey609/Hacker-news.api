@@ -9,8 +9,9 @@ interface Object {
     title: string
     time: number
     user: string
+    content: string
     comments_count: number
-    comments: Array<object>
+    comments: Array<Object>
 }
 
 export const Item = () => {
@@ -44,11 +45,11 @@ export const Item = () => {
 
             <div>
                 {item.comments
-                    .map((comment, id: number) => {
+                    .map((comment, id: number) =>
                     <div key={id}>
                         {comment.content}
                     </div>
-                })
+                )
                 }
             </div>
         </div>
