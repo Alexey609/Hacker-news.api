@@ -18,9 +18,10 @@ export const Comments = ({ comment }: Comment) => {
           aria-controls="panel1a-content"
           id="panel1a-header"
         >
-          <Typography style={{ wordWrap: 'break-word', width: 800 }}>
-            {comment.content}
-          </Typography>
+          <Typography
+            style={{ wordWrap: 'break-word', width: 800 }}
+            dangerouslySetInnerHTML={{ __html: comment.content }}
+          />
         </AccordionSummary>
         <AccordionDetails>
           {comment.comments?.map(
