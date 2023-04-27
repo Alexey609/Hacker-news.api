@@ -23,7 +23,9 @@ export const Comment = ({ comment }: CommentID) => {
             dangerouslySetInnerHTML={{ __html: comment.content }}
           />
         </AccordionSummary>
-        <Comments comment={comment} />
+        {comment.comments.map((c: any, id: number) => (
+          <Comments comment={c} key={id} />
+        ))}
       </Accordion>
     </div>
   );
