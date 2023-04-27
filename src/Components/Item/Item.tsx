@@ -5,7 +5,7 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { Link, useParams } from 'react-router-dom';
 import Moment from 'react-moment';
 import { getItem } from '../../Api/hnApi';
-import { Comments } from '../Comments/Comments';
+import { Comment } from '../Comments/Comment';
 import styles from './Item.module.css';
 
 export const Item = () => {
@@ -58,7 +58,7 @@ export const Item = () => {
       <div className={styles.comments}>
         <h4>Комментарии:</h4>
         {data?.comments.map((comment: any, id: number) => (
-          <Comments key={id} comment={comment} />
+          <Comment key={id} comment={comment} />
         ))}
         <Button
           variant="outlined"
