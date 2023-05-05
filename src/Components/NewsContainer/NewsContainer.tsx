@@ -24,7 +24,7 @@ export const NewsContainer = () => {
       <ol>
         {data?.map((item: any, id: number) => (
           <li key={id}>
-            <News news={item} />{' '}
+            <News news={item} />
           </li>
         ))}
       </ol>
