@@ -6,6 +6,7 @@ import { News } from '../index';
 import styles from './NewsContainer.module.css';
 
 export const NewsContainer = () => {
+  //кэширование списка новостей/
   const { data, refetch } = useQuery({
     queryKey: ['news'],
     queryFn: getNews,
