@@ -15,4 +15,4 @@
 - React-Moment
 - Material UI
 
-#### Кэширование сделано посредством библтотеки https://tanstack.com/query/latest/docs/react/overview 
+#### Кэширование сделано посредством библиотеки https://tanstack.com/query/latest/docs/react/overview 
