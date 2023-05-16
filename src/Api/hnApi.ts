@@ -1,9 +1,21 @@
-import axios from 'axios';
+import Axios from 'axios';
+
+const axios = Axios.create({ baseURL: `https://api.hnpwa.com/v0` });
 
 export const page1Url = 'https://api.hnpwa.com/v0/newest/1.json';
 export const page2Url = 'https://api.hnpwa.com/v0/newest/2.json';
 export const page3Url = 'https://api.hnpwa.com/v0/newest/3.json';
 export const page4Url = 'https://api.hnpwa.com/v0/newest/4.json';
+
+export const fetchNews = async () => {
+  const result = await Promise.all(
+    [1, 2, 3, 4].map((i) =>
+      axios.get(`/newest/${i}.json`).then(({ data }) => data)
+    )
+  );
+
+  return result;
+};
 
 export const getNews = async () => {
   const page1 = await axios.get(page1Url).then(({ data }) => data);
