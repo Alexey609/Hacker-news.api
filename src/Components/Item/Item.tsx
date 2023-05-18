@@ -1,34 +1,38 @@
-import React from 'react';
-import { useQuery } from '@tanstack/react-query';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import Button from '@mui/material/Button';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { Link, useParams } from 'react-router-dom';
 import Moment from 'react-moment';
-import { getItem } from '../../Api/hnApi';
 import { Comment } from '../Comments/Comment';
+import { fetchId } from '../../redux/slices/idSlice';
+import { AppDispatch } from '../../redux';
 import styles from './Item.module.css';
 
 export const Item = () => {
   const { id }: { id?: number } = useParams();
+  const dispatch = useDispatch<AppDispatch>();
 
-  const { data, refetch } = useQuery({
-    queryKey: ['itemId', id],
-    queryFn: () => getItem(id),
-    staleTime: 60000,
-  });
+  // @ts-ignore
+  const state = useSelector((state) => state.id.data);
+
+  useEffect(() => {
+    dispatch(fetchId(id));
+    setInterval(() => dispatch(fetchId(id)), 60000);
+  }, [dispatch, id]);
 
   const handleReset = () => {
-    refetch();
+    dispatch(fetchId(id));
   };
 
   return (
     <div className={styles.detailNews__item}>
       <div className={styles.detailNews__top}>
-        <h4 className={styles.detailNews__title}>{data?.title}</h4>
+        <h4 className={styles.detailNews__title}>{state?.title}</h4>
         <div>
-          {data?.url && (
-            <Link to={data.url} className={styles.detailNews__link}>
-              {data.url} ссылка на первоисточник
+          {state?.url && (
+            <Link to={state.url} className={styles.detailNews__link}>
+              {state.url} ссылка на первоисточник
             </Link>
           )}
         </div>
@@ -41,11 +45,11 @@ export const Item = () => {
             format="MMM, DD YYYY • hh:mm a"
             style={{ marginLeft: 4 }}
           >
-            {data?.time}
+            {state?.time}
           </Moment>
         </div>
-        <div>Автор - {data?.user}</div>
-        <div>Количество комментариев: {data?.comments_count}</div>
+        <div>Автор - {state?.user}</div>
+        <div>Количество комментариев: {state?.comments_count}</div>
       </div>
 
       <div className={styles.container__link}>
@@ -57,7 +61,7 @@ export const Item = () => {
 
       <div className={styles.comments}>
         <h4>Комментарии:</h4>
-        {data?.comments.map((comment: any, id: number) => (
+        {state?.comments.map((comment: any, id: number) => (
           <Comment key={id} comment={comment} />
         ))}
         <Button

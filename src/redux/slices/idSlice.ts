@@ -15,32 +15,31 @@ const initialState: NewsState = {
   isError: false,
 };
 
-export const fetchStore = createAsyncThunk('fetchStore', async () => {
-  const result = await Promise.all(
-    [1, 2, 3, 4].map((i) =>
-      axios.get(`/newest/${i}.json`).then(({ data }) => data)
-    )
-  );
+export const fetchId = createAsyncThunk(
+  'news/fetchNewsById',
+  async (id: number | undefined) => {
+    const result = await axios.get(`/item/${id}.json`).then(({ data }) => data);
 
-  return result.reduce((a, b) => [...a, ...b], []).slice(0, 100);
-});
+    return result;
+  }
+);
 
 // @ts-ignore
-export const newsSlice = createSlice({
-  name: 'news',
+export const idSlice = createSlice({
+  name: 'newsId',
   initialState,
   extraReducers: (builder) => {
-    builder.addCase(fetchStore.pending, (state) => {
+    builder.addCase(fetchId.pending, (state) => {
       state.isLoading = true;
     });
-    builder.addCase(fetchStore.fulfilled, (state, action) => {
+    builder.addCase(fetchId.fulfilled, (state, action) => {
       state.isLoading = false;
       state.data = action.payload;
     });
-    builder.addCase(fetchStore.rejected, (state) => {
+    builder.addCase(fetchId.rejected, (state) => {
       state.isError = true;
     });
   },
 });
 
-export default newsSlice.reducer;
+export default idSlice.reducer;
