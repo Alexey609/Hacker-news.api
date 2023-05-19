@@ -1,24 +1,11 @@
-import React, { useEffect, useContext } from 'react';
+import React from 'react';
 import Button from '@mui/material/Button';
-import { NewsContext } from '../../Api/hnApi';
+import { useNewsFeed } from '../../Api/hnApi';
 import { News } from '../index';
 import styles from './NewsContainer.module.css';
 
 export const NewsContainer = () => {
-  const { state, fetchFeed } = useContext(NewsContext);
-
-  useEffect(() => {
-    state.feed.length === 0 && fetchFeed?.();
-  }, [state, fetchFeed]);
-
-  useEffect(() => {
-    const interval = setInterval(() => fetchFeed, 60000);
-    return () => clearInterval(interval);
-  }, [fetchFeed]);
-
-  const handleReset = () => {
-    fetchFeed && fetchFeed();
-  };
+  const { feed, handleReset } = useNewsFeed();
 
   return (
     <div className={styles.container}>
@@ -26,7 +13,7 @@ export const NewsContainer = () => {
         Перезагрузка
       </Button>
       <ol>
-        {state?.feed?.map((item) => (
+        {feed?.map((item) => (
           <li key={item.id}>
             <News item={item} />
           </li>
