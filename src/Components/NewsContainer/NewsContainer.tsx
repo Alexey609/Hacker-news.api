@@ -1,29 +1,23 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useEffect, useContext } from 'react';
 import Button from '@mui/material/Button';
-import { AppDispatch } from '../../redux';
-import { fetchStore } from '../../redux/slices/newsSlice';
+import { NewsContext } from '../../Api/hnApi';
 import { News } from '../index';
 import styles from './NewsContainer.module.css';
 
 export const NewsContainer = () => {
-  const dispatch = useDispatch<AppDispatch>();
-  // @ts-ignore
-  const state = useSelector((state) => state.news.data);
-  //кэширование списка новостей/
-  // const { data, refetch } = useQuery({
-  //   queryKey: ['news'],
-  //   queryFn: getNews,
-  //   staleTime: 60000,
-  // });
+  const { state, fetchFeed } = useContext(NewsContext);
 
   useEffect(() => {
-    dispatch(fetchStore());
-    setInterval(() => dispatch(fetchStore()), 60000);
-  }, [dispatch]);
+    state.feed.length === 0 && fetchFeed?.();
+  }, [state, fetchFeed]);
+
+  useEffect(() => {
+    const interval = setInterval(() => fetchFeed, 60000);
+    return () => clearInterval(interval);
+  }, [fetchFeed]);
 
   const handleReset = () => {
-    dispatch(fetchStore());
+    fetchFeed && fetchFeed();
   };
 
   return (
@@ -32,9 +26,9 @@ export const NewsContainer = () => {
         Перезагрузка
       </Button>
       <ol>
-        {state?.map((item: any, id: number) => (
-          <li key={id}>
-            <News news={item} />
+        {state?.feed?.map((item) => (
+          <li key={item.id}>
+            <News item={item} />
           </li>
         ))}
       </ol>

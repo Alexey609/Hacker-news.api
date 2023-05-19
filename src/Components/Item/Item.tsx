@@ -1,38 +1,40 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useEffect, useContext } from 'react';
 import Button from '@mui/material/Button';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { Link, useParams } from 'react-router-dom';
 import Moment from 'react-moment';
 import { Comment } from '../Comments/Comment';
-import { fetchId } from '../../redux/slices/idSlice';
-import { AppDispatch } from '../../redux';
+import { NewsContext } from '../../Api/hnApi';
 import styles from './Item.module.css';
 
 export const Item = () => {
-  const { id }: { id?: number } = useParams();
-  const dispatch = useDispatch<AppDispatch>();
+  const { id }: { id?: string } = useParams();
 
-  // @ts-ignore
-  const state = useSelector((state) => state.id.data);
+  const { state, fetchItem } = useContext(NewsContext);
 
   useEffect(() => {
-    dispatch(fetchId(id));
-    setInterval(() => dispatch(fetchId(id)), 60000);
-  }, [dispatch, id]);
+    id && !state.news[parseInt(id)] && fetchItem?.(id);
+  }, [id, state, fetchItem]);
+
+  useEffect(() => {
+    const interval = setInterval(() => fetchItem?.(id && parseInt(id)), 60000);
+    return () => clearInterval(interval);
+  }, [id, fetchItem]);
 
   const handleReset = () => {
-    dispatch(fetchId(id));
+    fetchItem && fetchItem?.(id && parseInt(id));
   };
+
+  const data = id ? state.news[parseInt(id)] : undefined;
 
   return (
     <div className={styles.detailNews__item}>
       <div className={styles.detailNews__top}>
-        <h4 className={styles.detailNews__title}>{state?.title}</h4>
+        <h4 className={styles.detailNews__title}>{data?.title}</h4>
         <div>
-          {state?.url && (
-            <Link to={state.url} className={styles.detailNews__link}>
-              {state.url} ссылка на первоисточник
+          {data?.url && (
+            <Link to={data.url} className={styles.detailNews__link}>
+              {data.url} ссылка на первоисточник
             </Link>
           )}
         </div>
@@ -45,11 +47,11 @@ export const Item = () => {
             format="MMM, DD YYYY • hh:mm a"
             style={{ marginLeft: 4 }}
           >
-            {state?.time}
+            {data?.time}
           </Moment>
         </div>
-        <div>Автор - {state?.user}</div>
-        <div>Количество комментариев: {state?.comments_count}</div>
+        <div>Автор - {data?.user}</div>
+        <div>Количество комментариев: {data?.comments_count}</div>
       </div>
 
       <div className={styles.container__link}>
@@ -61,7 +63,7 @@ export const Item = () => {
 
       <div className={styles.comments}>
         <h4>Комментарии:</h4>
-        {state?.comments.map((comment: any, id: number) => (
+        {data?.comments.map((comment: any, id: number) => (
           <Comment key={id} comment={comment} />
         ))}
         <Button

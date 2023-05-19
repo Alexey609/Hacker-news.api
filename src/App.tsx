@@ -1,15 +1,13 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { NewsProvider } from './Api/hnApi';
 import { Header, NewsContainer, Item, Footer } from './Components';
 import './App.css';
-
-const queryClient = new QueryClient();
 
 function App() {
   return (
     <div className="App">
-      <QueryClientProvider client={queryClient}>
+      <NewsProvider>
         <Header />
         <main className="main">
           <Routes>
@@ -18,7 +16,7 @@ function App() {
           </Routes>
         </main>
         <Footer />
-      </QueryClientProvider>
+      </NewsProvider>
     </div>
   );
 }
