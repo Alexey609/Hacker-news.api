@@ -1,31 +1,16 @@
-import React, { useEffect, useContext } from 'react';
+import React from 'react';
 import Button from '@mui/material/Button';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { Link, useParams } from 'react-router-dom';
 import Moment from 'react-moment';
 import { Comment } from '../Comments/Comment';
-import { NewsContext } from '../../Api/hnApi';
+import { useFeedId } from '../../Api/hnApi';
 import styles from './Item.module.css';
 
 export const Item = () => {
   const { id }: { id?: string } = useParams();
 
-  const { state, fetchItem } = useContext(NewsContext);
-
-  useEffect(() => {
-    id && !state.news[parseInt(id)] && fetchItem?.(id);
-  }, [id, state, fetchItem]);
-
-  useEffect(() => {
-    const interval = setInterval(() => fetchItem?.(id && parseInt(id)), 60000);
-    return () => clearInterval(interval);
-  }, [id, fetchItem]);
-
-  const handleReset = () => {
-    fetchItem && fetchItem?.(id && parseInt(id));
-  };
-
-  const data = id ? state.news[parseInt(id)] : undefined;
+  const { data, handleReset } = useFeedId({ id });
 
   return (
     <div className={styles.detailNews__item}>
