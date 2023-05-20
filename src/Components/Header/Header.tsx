@@ -11,7 +11,7 @@ export const Header = () => {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" style={{ backgroundColor: 'salmon' }}>
         <Toolbar>
-          <Typography variant="h6" component="div">
+          <Typography variant="h6" component="h6">
             <Link to="/" className={styles.header__link}>
               HackerNews
             </Link>
