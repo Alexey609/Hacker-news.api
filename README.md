@@ -15,4 +15,4 @@
 - React-Moment
 - Material UI
 
-#### Кэширование сделано посредством библиотеки https://tanstack.com/query/latest/docs/react/overview 
+#### state менеджер react context 
