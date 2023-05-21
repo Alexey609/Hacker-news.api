@@ -10,7 +10,6 @@
 - Typescript
 - React-Router 
 - Axios
-- Tan-Stack query
 - Hooks 
 - React-Moment
 - Material UI
