@@ -9,7 +9,6 @@ import style from './Comment.module.css';
 
 
 export const Comment = ({ comment }: { comment: CommentItem }) => {
-
   return (
     <div>
       <Accordion>
