@@ -16,7 +16,7 @@ export interface FeedItem {
   domain?: string;
 }
 
-export interface Item {
+export interface CommentItem {
   id: number;
   title: string;
   points: number | null;
@@ -29,14 +29,14 @@ export interface Item {
   type: string;
   url?: string;
   domain?: string;
-  comments: Item[]; // Comments are items too
+  comments: CommentItem[]; // Comments are items too
   level: number;
   comments_count: number;
 }
 
 interface State {
-  feed: Array<FeedItem>;
-  news: { [id: number]: Item };
+  feed: FeedItem[];
+  news: { [id: number]: CommentItem };
 }
 
 interface Context {

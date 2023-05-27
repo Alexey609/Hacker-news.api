@@ -9,9 +9,6 @@
     0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
 }
 
-.detailNews__top {
-}
-
 .detailNews__title {
   font-size: 21px;
 }
@@ -28,9 +25,16 @@
   min-height: 100px;
 }
 
+.time {
+  margin-left: 4px;
+}
+
+.button {
+  margin-top: 15px;
+}
+
 .container__link {
   display: flex;
-  flex-direction: row;
   justify-content: center;
 }
 

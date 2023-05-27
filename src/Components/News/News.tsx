@@ -8,13 +8,12 @@ import styles from './News.module.css';
 export const News = ({ item }: { item: FeedItem }) => {
   return (
     <div className={styles.item}>
-      <Paper elevation={4}>
-        <div className={styles.item__top}>
-          <Link to={`/news/${item.id}`} className={styles.item__link}>
+      <Link to={`/news/${item.id}`}  className={styles.item__link}>
+      <Paper elevation={4} className={styles.paper}>
+          <h4>
             {item.title}
-          </Link>
-        </div>
-        <div className={styles.item__body}>
+          </h4>
+        <div>
           <div>Автор - {item.user}</div>
           <div>Рейтинг: {item.points}</div>
           <div>
@@ -22,13 +21,14 @@ export const News = ({ item }: { item: FeedItem }) => {
             <Moment
               unix
               format="MMM, DD YYYY • hh:mm a"
-              style={{ marginLeft: 4 }}
+              className={styles.time}
             >
               {item.time}
             </Moment>
           </div>
         </div>
       </Paper>
+      </Link>
     </div>
   );
 };

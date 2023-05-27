@@ -14,7 +14,7 @@ export const Item = () => {
 
   return (
     <div className={styles.detailNews__item}>
-      <div className={styles.detailNews__top}>
+      <div>
         <h4 className={styles.detailNews__title}>{data?.title}</h4>
         <div>
           {data?.url && (
@@ -30,7 +30,7 @@ export const Item = () => {
           <Moment
             unix
             format="MMM, DD YYYY • hh:mm a"
-            style={{ marginLeft: 4 }}
+            className={styles.time}
           >
             {data?.time}
           </Moment>
@@ -53,7 +53,7 @@ export const Item = () => {
         ))}
         <Button
           variant="outlined"
-          style={{ marginTop: 15 }}
+          className={styles.button}
           onClick={handleReset}
         >
           Перезагрузка
