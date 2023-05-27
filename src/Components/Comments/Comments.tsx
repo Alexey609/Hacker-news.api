@@ -8,7 +8,8 @@ export const Comments = ({ comment }: { comment: CommentItem}) => {
 
   return (
     <AccordionDetails>
-      <Typography dangerouslySetInnerHTML={{ __html: comment.content }} />
+        <Typography dangerouslySetInnerHTML={{ __html: comment.content }}>
+        </Typography>
       <Comment comment={comment} />
     </AccordionDetails>
   );

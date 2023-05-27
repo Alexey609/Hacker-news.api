@@ -1,4 +1,5 @@
 import React from 'react';
+import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { Link, useParams } from 'react-router-dom';
@@ -51,13 +52,14 @@ export const Item = () => {
         {data?.comments.map((comment: any, id: number) => (
           <Comment key={id} comment={comment} />
         ))}
-        <Button
-          variant="outlined"
-          className={styles.button}
-          onClick={handleReset}
-        >
-          Перезагрузка
-        </Button>
+        <Box mt={2}>
+            <Button
+                variant="outlined"
+                onClick={handleReset}
+            >
+                Перезагрузка
+            </Button>
+        </Box>
       </div>
     </div>
   );

@@ -5,7 +5,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Typography from '@mui/material/Typography';
 import { Comments } from './Comments';
 import { CommentItem } from '../../Api/hnApi';
-import style from './Comment.module.css';
+import styles from './Comment.module.css';
 
 
 export const Comment = ({ comment }: { comment: CommentItem }) => {
@@ -18,9 +18,9 @@ export const Comment = ({ comment }: { comment: CommentItem }) => {
           id="panel1a-header"
         >
           <Typography
-            className={style.comment__item}
-            dangerouslySetInnerHTML={{ __html: comment.content }}
-          />
+              className={styles.comment__item}
+              dangerouslySetInnerHTML={{ __html: comment.content }}>
+          </Typography>
         </AccordionSummary>
         {comment.comments.filter(comment => !comment.deleted).map((c: any, id: number) => (
           <Comments comment={c} key={id} />

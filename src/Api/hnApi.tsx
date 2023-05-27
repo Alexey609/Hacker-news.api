@@ -35,7 +35,7 @@ export interface CommentItem {
 }
 
 interface State {
-  feed: FeedItem[];
+  article: FeedItem[];
   news: { [id: number]: CommentItem };
 }
 
@@ -46,11 +46,11 @@ interface Context {
 }
 
 export const NewsContext = React.createContext<Context>({
-  state: { feed: [], news: {} },
+  state: { article: [], news: {} },
 });
 
 export const NewsProvider = ({ children }: { children: React.ReactNode }) => {
-  const [state, setState] = useState<State>({ feed: [], news: {} });
+  const [state, setState] = useState<State>({ article: [], news: {} });
 
   const fetchFeed = useCallback(async () => {
     const result = await Promise.all(
@@ -61,7 +61,7 @@ export const NewsProvider = ({ children }: { children: React.ReactNode }) => {
 
     setState({
       ...state,
-      feed: result.reduce((a, b) => [...a, ...b], []).slice(0, 100),
+      article: result.reduce((a, b) => [...a, ...b], []).slice(0, 100),
     });
   }, [state]);
 
@@ -90,7 +90,7 @@ export const useNewsFeed = () => {
   const { state, fetchFeed } = useContext(NewsContext);
 
   useEffect(() => {
-    state.feed.length === 0 && fetchFeed?.();
+    state.article.length === 0 && fetchFeed?.();
   }, [state, fetchFeed]);
 
   useEffect(() => {
@@ -103,7 +103,7 @@ export const useNewsFeed = () => {
   };
 
   return {
-    feed: state?.feed,
+    feed: state?.article,
     handleReset,
   };
 };
