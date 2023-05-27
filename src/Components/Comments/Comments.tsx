@@ -5,6 +5,7 @@ import { Comment } from './Comment';
 import { CommentItem } from '../../Api/hnApi';
 
 export const Comments = ({ comment }: { comment: CommentItem}) => {
+
   return (
     <AccordionDetails>
       <Typography dangerouslySetInnerHTML={{ __html: comment.content }} />
