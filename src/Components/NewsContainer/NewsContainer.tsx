@@ -1,6 +1,6 @@
 import React from 'react';
 import Button from '@mui/material/Button';
-import { useNewsFeed } from '../../Api/hnApi';
+import { useNewsFeed } from '../../hooks/useNewsFeed';
 import { News } from '../index';
 import styles from './NewsContainer.module.css';
 

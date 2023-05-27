@@ -5,7 +5,7 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { Link, useParams } from 'react-router-dom';
 import Moment from 'react-moment';
 import { Comment } from '../Comments/Comment';
-import { useFeedId } from '../../Api/hnApi';
+import { useFeedId } from '../../hooks/useFeedId';
 import styles from './Item.module.css';
 
 export const Item = () => {

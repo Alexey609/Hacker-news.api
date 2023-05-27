@@ -1,5 +1,5 @@
 import Axios from 'axios';
-import React, { useCallback, useState, useEffect, useContext } from 'react';
+import React, { useCallback, useState } from 'react';
 
 const axios = Axios.create({ baseURL: `https://api.hnpwa.com/v0` });
 
@@ -84,50 +84,4 @@ export const NewsProvider = ({ children }: { children: React.ReactNode }) => {
       {children}
     </NewsContext.Provider>
   );
-};
-
-export const useNewsFeed = () => {
-  const { state, fetchFeed } = useContext(NewsContext);
-
-  useEffect(() => {
-    state.article.length === 0 && fetchFeed?.();
-  }, [state, fetchFeed]);
-
-  useEffect(() => {
-    const interval = setInterval(() => fetchFeed, 60000);
-    return () => clearInterval(interval);
-  }, [fetchFeed]);
-
-  const handleReset = () => {
-    fetchFeed && fetchFeed();
-  };
-
-  return {
-    feed: state?.article,
-    handleReset,
-  };
-};
-
-export const useFeedId = ({ id }: { id?: string | undefined }) => {
-  const { state, fetchItem } = useContext(NewsContext);
-
-  useEffect(() => {
-    id && !state.news[parseInt(id)] && fetchItem?.(id);
-  }, [id, state, fetchItem]);
-
-  useEffect(() => {
-    const interval = setInterval(() => fetchItem?.(id && parseInt(id)), 60000);
-    return () => clearInterval(interval);
-  }, [id, fetchItem]);
-
-  const handleReset = () => {
-    fetchItem && fetchItem?.(id && parseInt(id));
-  };
-
-  const data = id ? state.news[parseInt(id)] : undefined;
-
-  return {
-    data,
-    handleReset,
-  };
 };
