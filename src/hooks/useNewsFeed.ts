@@ -1,11 +1,11 @@
-import {useContext, useEffect} from "react";
-import {NewsContext} from "../Api/hnApi";
+import { useContext, useEffect } from 'react';
+import { NewsContext } from '../Api/hnApi';
 
 export const useNewsFeed = () => {
     const { state, fetchFeed } = useContext(NewsContext);
 
     useEffect(() => {
-        !state.article.length && fetchFeed?.();
+        !state.article.length && fetchFeed();
     }, [state, fetchFeed]);
 
     useEffect(() => {
@@ -14,7 +14,7 @@ export const useNewsFeed = () => {
     }, [fetchFeed]);
 
     const handleReset = () => {
-        fetchFeed && fetchFeed();
+        fetchFeed();
     };
 
     return {

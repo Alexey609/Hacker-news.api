@@ -1,7 +1,7 @@
 import {useContext, useEffect} from "react";
 import {NewsContext} from "../Api/hnApi";
 
-export const useFeedId = ({ id }: { id: string | undefined }) => {
+export const useFeedId = ({ id }: { id: string }) => {
     const { state, fetchItem } = useContext(NewsContext);
 
     useEffect(() => {
@@ -14,7 +14,7 @@ export const useFeedId = ({ id }: { id: string | undefined }) => {
     }, [id, fetchItem]);
 
     const handleReset = () => {
-        fetchItem && fetchItem?.(id && parseInt(id));
+        fetchItem(parseInt(id));
     };
 
     const data = id ? state.news[parseInt(id)] : undefined;

@@ -41,12 +41,14 @@ interface State {
 
 interface Context {
   state: State;
-  fetchFeed?: Function;
-  fetchItem?: Function;
+  fetchFeed: Function;
+  fetchItem: Function;
 }
 
 export const NewsContext = React.createContext<Context>({
   state: { article: [], news: {} },
+  fetchFeed: console.log,
+  fetchItem: console.log,
 });
 
 export const NewsProvider = ({ children }: { children: React.ReactNode }) => {
@@ -54,9 +56,9 @@ export const NewsProvider = ({ children }: { children: React.ReactNode }) => {
 
   const fetchFeed = useCallback(async () => {
     const result = await Promise.all(
-      [1, 2, 3, 4].map((i) =>
-        axios.get(`/newest/${i}.json`).then(({ data }) => data)
-      )
+        [1, 2, 3, 4].map((i) =>
+            axios.get(`/newest/${i}.json`).then(({ data }) => data)
+        )
     );
 
     setState({
@@ -66,22 +68,22 @@ export const NewsProvider = ({ children }: { children: React.ReactNode }) => {
   }, [state]);
 
   const fetchItem = useCallback(
-    async (id: number) => {
-      const result = await axios
-        .get(`/item/${id}.json`)
-        .then(({ data }) => data);
+      async (id: number) => {
+        const result = await axios
+            .get(`/item/${id}.json`)
+            .then(({ data }) => data);
 
-      setState({
-        ...state,
-        news: { ...state.news, [id]: result },
-      });
-    },
-    [state]
+        setState({
+          ...state,
+          news: { ...state.news, [id]: result },
+        });
+      },
+      [state]
   );
 
   return (
-    <NewsContext.Provider value={{ state, fetchFeed, fetchItem }}>
-      {children}
-    </NewsContext.Provider>
+      <NewsContext.Provider value={{ state, fetchFeed, fetchItem }}>
+        {children}
+      </NewsContext.Provider>
   );
 };

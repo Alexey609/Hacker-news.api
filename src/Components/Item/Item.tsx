@@ -11,7 +11,7 @@ import styles from './Item.module.css';
 export const Item = () => {
   const { id }: { id?: string } = useParams();
 
-  const { data, handleReset } = useFeedId({ id });
+  const { data, handleReset } = useFeedId({ id: id! });
 
   return (
     <div className={styles.detailNews__item}>
