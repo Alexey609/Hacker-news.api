@@ -32,6 +32,8 @@ export interface CommentItem {
   comments: CommentItem[]; // Comments are items too
   level: number;
   comments_count: number;
+  depth?: number;
+  style?: object;
 }
 
 interface State {

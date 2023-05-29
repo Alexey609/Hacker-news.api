@@ -6,6 +6,7 @@ import { Link, useParams } from 'react-router-dom';
 import Moment from 'react-moment';
 import { Comment } from '../Comments/Comment';
 import { useFeedId } from '../../hooks/useFeedId';
+import { CommentItem } from '../../Api/hnApi';
 import styles from './Item.module.css';
 
 export const Item = () => {
@@ -49,8 +50,13 @@ export const Item = () => {
 
       <div className={styles.comments}>
         <h4>Комментарии:</h4>
-        {data?.comments.map((comment: any, id: number) => (
-          <Comment key={id} comment={comment} />
+        {data?.comments.map((comment: CommentItem, id: number) => (
+          <Comment
+              depth={0}
+              style={{}}
+              key={id}
+              comment={comment}
+          />
         ))}
         <Box mt={2}>
             <Button

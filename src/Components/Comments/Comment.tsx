@@ -3,12 +3,11 @@ import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Typography from '@mui/material/Typography';
-import { Comments } from './Comments';
 import { CommentItem } from '../../Api/hnApi';
 import styles from './Comment.module.css';
 
 
-export const Comment = ({ comment }: { comment: CommentItem }) => {
+export const Comment = ({ comment, depth, style }: { comment: CommentItem, depth: number, style: object}) => {
   return (
     <div>
       <Accordion>
@@ -22,8 +21,13 @@ export const Comment = ({ comment }: { comment: CommentItem }) => {
               dangerouslySetInnerHTML={{ __html: comment.content }}>
           </Typography>
         </AccordionSummary>
-        {comment.comments.filter(comment => !comment.deleted).map((c: any, id: number) => (
-          <Comments comment={c} key={id} />
+        {comment.comments.filter(comment => !comment.deleted).map((c: CommentItem, id: number) => (
+          <Comment
+              depth={depth + 1}
+              style={{paddingLeft: `${depth}rem`,}}
+              comment={c}
+              key={id}
+          />
         ))}
       </Accordion>
     </div>
